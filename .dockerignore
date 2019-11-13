@@ -4,9 +4,3 @@
 .travis.yml
 Dockerfile
 .DS_Store
-composer.json
-composer.lock
-cron
-index.php
-node_modules/
-vendor/

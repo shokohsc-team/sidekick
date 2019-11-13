@@ -17,13 +17,13 @@ function run() {
         return ch.consume(q, async function(msg) {
           if (msg !== null) {
             console.log(msg.content.toString());
-            if (void 0 !== config.mattermostWebhookUrl) {
-                await mattermost.send({
-                    text: msg.content.toString(),
-                    channel: '#minecraft',
-                    username: 'minecraft'
-                });
-            }
+            // if (void 0 !== config.mattermostWebhookUrl) {
+            //     await mattermost.send({
+            //         text: msg.content.toString(),
+            //         channel: '#minecraft',
+            //         username: 'minecraft'
+            //     });
+            // }
             ch.ack(msg);
           }
         });

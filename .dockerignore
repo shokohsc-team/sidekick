@@ -1,7 +1,11 @@
-.git
+node_modules
+npm-debug.log
+Dockerfile*
+docker-compose*
 .dockerignore
+.git
 .gitignore
-.travis.yml
-Dockerfile
+README.md
+LICENSE
+.vscode
 .DS_Store
-node_modules/

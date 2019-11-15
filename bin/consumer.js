@@ -9,6 +9,7 @@ function run() {
     var q = 'tasks';
 
     amqp.connect('amqp://'+config.amqpHost);
+    console.log(amqp);
     // Consumer
     amqp.then(function(conn) {
       return conn.createChannel();

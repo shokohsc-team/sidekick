@@ -8,7 +8,7 @@ function run() {
     const onError = require('./onError');
     var q = 'tasks';
 
-    amqp.connect('amqp://'+config.amqpHost+':'+config.amqpPort);
+    amqp.connect('amqp://'+config.amqpHost);
     // Consumer
     amqp.then(function(conn) {
       return conn.createChannel();

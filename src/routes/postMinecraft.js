@@ -8,7 +8,8 @@ const router = new express.Router();
 router.post('/minecraft', async (request, response) => {
 
     const data = request.body;
-    await sendRconCommand(data);
+    console.log(data);
+    // await sendRconCommand(data);
     response.status(200);
     response.send(request.body);
 });

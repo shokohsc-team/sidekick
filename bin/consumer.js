@@ -8,8 +8,12 @@ function run() {
     const onError = require('./onError');
     var q = 'tasks';
 
-    amqp.connect('amqp://'+config.amqpHost);
-    console.log(amqp);
+    amqp.connect('amqp://'+config.amqpHost, (err, conn) => {
+        if (err) {
+            return callback(`Unable to connect to rabbitMQ)`);
+            console.log(err);
+        }
+    });
     // Consumer
     amqp.then(function(conn) {
       return conn.createChannel();

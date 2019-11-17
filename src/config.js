@@ -69,6 +69,12 @@ const config = cfg({
       required: true,
       default: 5672,
   },
+  freeopenvpnUrl: {
+      env: 'FREEOPENVPN_URL',
+      type: 'string',
+      required: true,
+      default: 'https://www.freeopenvpn.org/en',
+  },
   mattermostWebhookUrl: {
       env: 'MATTERMOST_WEBHOOK_URL',
       type: 'string',

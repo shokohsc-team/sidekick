@@ -44,6 +44,22 @@ router.use(require('./getRoot'));
 
 /**
  * @swagger
+ * /ovpn:
+ *  get:
+ *    tags:
+ *      - GetOvpn
+ *    description: Returns text ovpn profile
+ *    produces:
+ *      - text/plain
+ *    responses:
+ *      200:
+ *        description: The Ovpn profile
+ *
+ */
+
+router.use(require('./getOvpn'));
+/**
+ * @swagger
  * /minecraft:
  *  post:
  *    tags:

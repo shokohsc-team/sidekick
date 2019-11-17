@@ -10,6 +10,7 @@
     "fixlint": "eslint . --fix",
     "lint": "eslint .",
     "develop": "nodemon --exec \"node -r dotenv/config\" ./bin/www.js",
+    "develop-consumer": "nodemon --exec \"node -r dotenv/config\" ./bin/consumer.js",
     "start": "node ./bin/www.js",
     "consumer": "node ./bin/consumer.js",
     "integration-test": "mocha --opts tests/integration.opts",
@@ -20,6 +21,7 @@
   "dependencies": {
     "12factor-config": "^2.0.0",
     "amqplib": "^0.5.5",
+    "bluebird": "^3.7.1",
     "body-parser": "^1.13.3",
     "compression": "^1.6.2",
     "cookie-parser": "~1.3.5",

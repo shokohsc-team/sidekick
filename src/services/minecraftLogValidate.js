@@ -34,7 +34,7 @@ async function minecraftLogValidate(message) {
         /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?=ThreadedAnvilChunkStorage).+$/,
         /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?=Server permissions).+$/,
         /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?=Starting remote control).+$/,
-        /^\[\d{2}:\d{2}:\d{2}\] \[Async Chat Thread - #\d+\/INFO\]: (?=\<.+\>).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\] \[Async Chat Thread - #\d+\/INFO\]: (?!\<.+\>).+$/,
     ];
 
     return await validate(message, regexes);

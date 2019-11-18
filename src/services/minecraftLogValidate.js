@@ -12,7 +12,6 @@ async function validate(msg, regexes) {
 }
 
 async function minecraftLogValidate(message) {
-    // Server thread/INFO: Group `time` Group `type` Group `message`
     const regexes = [
         /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!.+:\ (\d+%$|\d+$|\d+\.\d+$|\d+\ ms$|\d+ms$|true$|false$)).+$/,
         /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!.+loading\ it\ automatically$).+$/,

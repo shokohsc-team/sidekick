@@ -64,15 +64,70 @@ router.use(require('./getOvpn'));
  *  post:
  *    tags:
  *      - PostMinecraft
- *    description: Execute RCON command to minecraft server
+ *    description: Execute RCON command to minecraft server (forces 'say' command)
  *    consumes:
  *      - application/json
  *    parameters:
- *    - name: data
+ *    - name: token
+ *      in: Body
+ *      required: false
+ *      type: string
+ *      description: Mattermost outgoing webhook token
+ *    - name: team_id
+ *      in: Body
+ *      required: false
+ *      type: string
+ *      description: Mattermost outgoing webhook team_id
+ *    - name: team_domain
+ *      in: Body
+ *      required: false
+ *      type: string
+ *      description: Mattermost outgoing webhook team_domain
+ *    - name: channel_id
+ *      in: Body
+ *      required: false
+ *      type: string
+ *      description: Mattermost outgoing webhook channel_id
+ *    - name: team_name
+ *      in: Body
+ *      required: false
+ *      type: string
+ *      description: Mattermost outgoing webhook team_name
+ *    - name: user_id
+ *      in: Body
+ *      required: false
+ *      type: string
+ *      description: Mattermost outgoing webhook user_id
+ *    - name: user_name
  *      in: Body
  *      required: true
- *      type: object
- *      description: Mattermost outgoing webhook data
+ *      type: string
+ *      description: Mattermost outgoing webhook user_name
+ *    - name: post_id
+ *      in: Body
+ *      required: false
+ *      type: string
+ *      description: Mattermost outgoing webhook post_id
+ *    - name: text
+ *      in: Body
+ *      required: true
+ *      type: string
+ *      description: Mattermost outgoing webhook text
+ *    - name: trigger_word
+ *      in: Body
+ *      required: true
+ *      type: string
+ *      description: Mattermost outgoing webhook trigger_word
+ *    - name: file_ids
+ *      in: Body
+ *      required: false
+ *      type: string
+ *      description: Mattermost outgoing webhook file_ids
+ *    - name: timestamp
+ *      in: Body
+ *      required: false
+ *      type: integer
+ *      description: Mattermost outgoing webhook timestamp
  *    produces:
  *      - application/json
  *    responses:

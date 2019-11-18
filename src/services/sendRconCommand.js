@@ -1,7 +1,7 @@
 'use strict';
 
 const config = require('../../src/config');
-const rcon = require('rcon-client');
+const rcon = require('./rcon');
 
 async function sendRconCommand(command) {
     await rcon.connect({

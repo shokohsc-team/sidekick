@@ -42,7 +42,7 @@ function run() {
     });
 
     ok = ok.then(function(queue) {
-      return ch.consume(queue, postMattermost, {noAck: true});
+      return ch.consume(queue, postMattermost, {priority: 10});
     });
 
     return ok.then(function() {

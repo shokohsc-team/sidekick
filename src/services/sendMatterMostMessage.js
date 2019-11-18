@@ -7,7 +7,7 @@ const minecraftLogValidate = require('./minecraftLogValidate');
 async function sendMatterMostMessage(msg) {
     const isValid = await minecraftLogValidate(msg);
     if (void 0 !== config.mattermostWebhookUrl && isValid) {
-        const regex = /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>.+)$/g;
+        const regex = /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[(Server\ thread|Async\ Chat\ Thread\ -\ \#\d+)\/INFO\]):\ (?<message>.+)$/g;
         const { groups: { message } } = regex.exec(msg);
         await mattermost.send({
             text: message,

@@ -1,33 +1,35 @@
 'use strict';
 
 async function validate(msg, regexes) {
-    let pass = true;
+    let flag = true
     regexes.forEach(regex => {
-        if (false === pass || -1 !== msg.search(regex)) {
-            pass = false;
+        if (!regex.test(msg)) {
+            flag = false;
         }
     });
-    return pass;
+
+    return flag;
 }
 
 async function minecraftLogValidate(message) {
     // Server thread/INFO: Group `time` Group `type` Group `message`
     const regexes = [
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!.+:\ (\d+%$|\d+$|\d+\.\d+|\d+\ ms|true$|false$)).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!\[dynmap\]).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Loading\ properties).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!This\ server\ is\ running).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Console\ input\ is\ disabled).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Using\ \d+\ threads).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Debug\ logging\ is\ disabled).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Default\ game\ type).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Generating\ keypair).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Reloading\ ResourceManager).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Loaded\ \d+\ recipes).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Using\ epoll).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Preparing\ start\ region\ for\ dimension).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!Entity\ \w+\ Range).+)$/g,
-        /^(?<time>\[\d{2}:\d{2}:\d{2}\])\ (?<type>\[Server thread\/INFO\]):\ (?<message>(?!.+World\ Settings\ For).+)$/g,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!.+:\ (\d+%$|\d+$|\d+\.\d+$|\d+\ ms$|true$|false$)).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!.+loading\ it\ automatically$).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!.+World\ Settings\ For).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!\[dynmap\]).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Loading\ properties).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!This\ server\ is\ running).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Console\ input\ is\ disabled).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Using\ \d+\ threads).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Debug\ logging\ is\ disabled).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Default\ game\ type).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Generating\ keypair).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Reloading\ ResourceManager).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Loaded\ \d+\ recipes).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Using\ epoll).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Preparing\ start\ region\ for\ dimension).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Entity\ \w+\ Range).+$/,
     ];
 
     return await validate(message, regexes);

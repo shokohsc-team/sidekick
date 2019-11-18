@@ -29,7 +29,7 @@ async function minecraftLogValidate(message) {
         /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?!Using epoll).+$/,
         /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?!Preparing start region for dimension).+$/,
         /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?!Entity \w+ Range).+$/,
-        /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?!\[Rcon:).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?!\[Rcon).+$/,
         /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?!Saving chunks).+$/,
         /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?!ThreadedAnvilChunkStorage).+$/,
         /^\[\d{2}:\d{2}:\d{2}\] \[Server thread\/INFO\]: (?!Server permissions).+$/,

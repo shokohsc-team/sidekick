@@ -14,7 +14,7 @@ async function validate(msg, regexes) {
 async function minecraftLogValidate(message) {
     // Server thread/INFO: Group `time` Group `type` Group `message`
     const regexes = [
-        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!.+:\ (\d+%$|\d+$|\d+\.\d+$|\d+\ ms$|true$|false$)).+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!.+:\ (\d+%$|\d+$|\d+\.\d+$|\d+\ ms$|\d+ms$|true$|false$)).+$/,
         /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!.+loading\ it\ automatically$).+$/,
         /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!.+World\ Settings\ For).+$/,
         /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!\[dynmap\]).+$/,
@@ -33,10 +33,9 @@ async function minecraftLogValidate(message) {
         /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!\[Rcon:).+$/,
         /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Saving\ chunks).+$/,
         /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!ThreadedAnvilChunkStorage).+$/,
-        /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Tile\ Max\ Tick\ Time).+$/,
         /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Server\ permissions).+$/,
         /^\[\d{2}:\d{2}:\d{2}\]\ \[Server thread\/INFO\]:\ (?!Starting\ remote\ control).+$/,
-        /^\[\d{2}:\d{2}:\d{2}\]\ \[Async\ Chat\ Thread\ -\ \#\d+\/INFO\]:\ .+$/,
+        /^\[\d{2}:\d{2}:\d{2}\]\ \[Async\ Chat\ Thread\ -\ \#\d+\/INFO\]:\ (?!\<.+\>).+$/,
     ];
 
     return await validate(message, regexes);

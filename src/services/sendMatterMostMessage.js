@@ -18,9 +18,8 @@ async function sendMatterMostMessage(msg) {
             });
         } catch (err) {
             console.log('Cannot post to mattermost, msg: ');
-            console.log(msg)
-            console.log('Error: ');
-            console.log(err)
+            console.log(msg);
+            console.log(err);
         }
     }
 };

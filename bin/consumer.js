@@ -31,7 +31,7 @@ function run() {
     let ok = ch.assertExchange(ex, 'topic', {durable: true});
 
     ok = ok.then(function() {
-      return ch.assertQueue('', {exclusive: false, autoDelete: true, expires: 30000, messageTtl: 60000, maxLength: 500});
+      return ch.assertQueue('', {exclusive: false, autoDelete: true, expires: 30000, messageTtl: 60000, maxLength: 1000});
     });
 
     ok = ok.then(function(qok) {

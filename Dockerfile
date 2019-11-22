@@ -10,6 +10,6 @@ COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY ./root/etc/services.d/node-consumer /etc/services.d/node-consumer
 COPY . .
 
-HEALTHCHECK CMD curl --fail http://localhost/api-docs || exit 1 
+HEALTHCHECK CMD curl --fail http://localhost:3000/api-docs || exit 1 
 
 EXPOSE 3000

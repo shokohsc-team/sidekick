@@ -11,7 +11,7 @@ function run() {
 
     async function postMattermost(msg) {
         const content = JSON.parse(msg.content.toString());
-        if ('minecraft' == content.container.name) {
+        if (content.container && content.container.name && 'minecraft' == content.container.name) {
             await sendMatterMostMessage(content.message);
         }
     }
@@ -31,7 +31,7 @@ function run() {
     let ok = ch.assertExchange(ex, 'topic', {durable: true});
 
     ok = ok.then(function() {
-      return ch.assertQueue('', {exclusive: false, autoDelete: true, expires: 30000, messageTtl: 60000, maxLength: 1000});
+      return ch.assertQueue('', {exclusive: false, autoDelete: true, expires: 30000, messageTtl: 30000});
     });
 
     ok = ok.then(function(qok) {

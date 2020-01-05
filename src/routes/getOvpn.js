@@ -17,8 +17,8 @@ router.get('/ovpn', async (request, response) => {
     if (void 0 !== config.mattermostWebhookUrl) {
         await mattermost.send({
             text: 'Served '+profileLink,
-            channel: '#gateway-sidekick',
-            username: 'gateway-api'
+            channel: config.mattermostOvpnChannel,
+            username: 'sidekick'
         });
     }
 

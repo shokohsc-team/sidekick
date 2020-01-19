@@ -21,6 +21,31 @@ const router = new express.Router();
  *      commit:
  *        type: string
  *        description: The commit hash
+ *  getGit:
+ *    type: object
+ *    properties:
+ *      branches:
+ *        schema:
+ *          $ref: "#/definitions/arrayOfBranches"
+ *      releases:
+ *        schema:
+ *          $ref: "#/definitions/arrayOfReleases"
+ *  arrayOfReleases:
+ *    type: array
+ *    items:
+ *      $ref: "#/definitions/release"
+ *  release:
+ *    type: string
+ *    description: Release name
+ *    example: v1.2.42 or v0.0.1
+ *  arrayOfBranches:
+ *    type: array
+ *    items:
+ *      $ref: "#/definitions/branch"
+ *  branch:
+ *    type: string
+ *    description: Branch name
+ *    example: feature/my-branch or master
  */
 
 /**
@@ -137,5 +162,34 @@ router.use(require('./getOvpn'));
  */
 
 router.use(require('./postMinecraft'));
+
+/**
+ * @swagger
+ * /git/{repositoryUrl}:
+ *  get:
+ *    tags:
+ *      - getGit
+ *    description: Returns git repository branches & releases
+ *    consumes:
+ *      - application/x-www-form-urlencoded
+ *    parameters:
+ *    - name: repositoryUrl
+ *      in: path
+ *      required: true
+ *      type: string
+ *      description: The git repository url
+ *    produces:
+ *      - application/json
+ *    responses:
+ *      200:
+ *        description: The git repository branches & releases
+ *        schema:
+ *          $ref: "#/definitions/getGit"
+ *      404:
+ *        description: repository url not found
+ *
+ */
+
+router.use(require('./getGit'));
 
 module.exports = router;

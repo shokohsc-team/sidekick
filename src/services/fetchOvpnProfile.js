@@ -1,6 +1,5 @@
 'use strict';
 
-const crawler = require('./crawler');
 const https = require('https');
 
 async function fetchOvpnProfile(link) {

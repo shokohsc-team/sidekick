@@ -25,11 +25,14 @@ const router = new express.Router();
  *    type: object
  *    properties:
  *      branches:
- *        schema:
- *          $ref: "#/definitions/arrayOfBranches"
+ *        $ref: "#/definitions/arrayOfBranches"
  *      releases:
- *        schema:
- *          $ref: "#/definitions/arrayOfReleases"
+ *        $ref: "#/definitions/arrayOfReleases"
+ *  getDocker:
+ *    type: object
+ *    properties:
+ *      tags:
+ *        $ref: "#/definitions/arrayOfTags"
  *  arrayOfReleases:
  *    type: array
  *    items:
@@ -37,7 +40,7 @@ const router = new express.Router();
  *  release:
  *    type: string
  *    description: Release name
- *    example: v1.2.42 or v0.0.1
+ *    example: v0.0.1
  *  arrayOfBranches:
  *    type: array
  *    items:
@@ -45,7 +48,15 @@ const router = new express.Router();
  *  branch:
  *    type: string
  *    description: Branch name
- *    example: feature/my-branch or master
+ *    example: master
+ *  arrayOfTags:
+ *    type: array
+ *    items:
+ *      $ref: "#/definitions/tag"
+ *  tag:
+ *    type: string
+ *    description: Tag name
+ *    example: v0.0.1
  */
 
 /**
@@ -165,19 +176,84 @@ router.use(require('./postMinecraft'));
 
 /**
  * @swagger
- * /git/{repositoryUrl}:
+ * /docker:
  *  get:
  *    tags:
- *      - getGit
- *    description: Returns git repository branches & releases
- *    consumes:
- *      - application/x-www-form-urlencoded
+ *      - GetDocker
+ *    description: Returns docker registry branches & releases
  *    parameters:
- *    - name: repositoryUrl
- *      in: path
+ *    - name: author
+ *      in: query
  *      required: true
  *      type: string
- *      description: The git repository url
+ *      description: The docker image author
+ *    - name: image
+ *      in: query
+ *      required: true
+ *      type: string
+ *      description: The docker image name
+ *    - name: domain
+ *      in: query
+ *      required: false
+ *      schema:
+ *         type: string
+ *         default: registry.hub.docker.com/v2
+ *      description: The docker registry domain
+ *    - name: limit
+ *      in: query
+ *      required: false
+ *      schema:
+ *         type: integer
+ *         minimum: 0
+ *         default: 2
+ *      description: The docker registry image tag limit
+ *    produces:
+ *      - application/json
+ *    responses:
+ *      200:
+ *        description: The docker registry branches & releases
+ *        schema:
+ *          $ref: "#/definitions/getDocker"
+ *      404:
+ *        description: registry url not found
+ *
+ */
+
+router.use(require('./getDocker'));
+
+/**
+ * @swagger
+ * /git:
+ *  get:
+ *    tags:
+ *      - GetGit
+ *    description: Returns git repository branches & releases
+ *    parameters:
+ *    - name: author
+ *      in: query
+ *      required: true
+ *      type: string
+ *      description: The git repository author
+ *    - name: repository
+ *      in: query
+ *      required: true
+ *      type: string
+ *      description: The git repository name
+ *    - name: domain
+ *      in: query
+ *      required: false
+ *      schema:
+ *         type: string
+ *         default: github.com
+ *      description: The git server domain
+ *    - name: limit
+ *      in: query
+ *      required: false
+ *      schema:
+ *         type: integer
+ *         minimum: 0
+ *         default: 2
+ *      description: The git server repository release limit
  *    produces:
  *      - application/json
  *    responses:

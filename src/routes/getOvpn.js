@@ -9,7 +9,7 @@ const mattermost = require('../services/mattermost');
 
 const router = new express.Router();
 
-router.get('/ovpn', async (request, response) => {
+router.get('/ovpn', async (req, res) => {
     const serverLink = await crawlOvpnServer();
     const profileLink = await crawlOvpnProfile(serverLink);
     const profile = await fetchOvpnProfile(profileLink);
@@ -17,14 +17,14 @@ router.get('/ovpn', async (request, response) => {
     if (void 0 !== config.mattermostWebhookUrl) {
         await mattermost.send({
             text: 'Served '+profileLink,
-            channel: config.mattermostOvpnChannel,
-            username: 'sidekick'
+            channel: '#'+config.mattermostOvpnChannel,
+            username: config.mattermostOvpnUser
         });
     }
 
-    response.status(200);
-    response.set('Content-Type', 'text/plain');
-    response.send(profile);
+    res.status(200);
+    res.set('Content-Type', 'text/plain');
+    res.send(profile);
 });
 
 module.exports = router;

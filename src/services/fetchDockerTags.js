@@ -5,10 +5,10 @@ const axios = require('axios');
 async function fetchDockerTags(registryUrl) {
     return axios.get(registryUrl)
     .then(function (response) {
-        return response.data ? response.data : {};
+        return response.data;
     })
     .catch(function (error) {
-        console.log('=========== ERROR ==========\n', error);
+        console.error(error);
         return [];
     });
 };

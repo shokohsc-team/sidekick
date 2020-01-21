@@ -21,6 +21,35 @@ const router = new express.Router();
  *      commit:
  *        type: string
  *        description: The commit hash
+ *  tag:
+ *    type: string
+ *    description: Tag name
+ *    example: v0.0.1
+ *  arrayOfTags:
+ *    type: array
+ *    items:
+ *      $ref: "#/definitions/tag"
+ *  getDocker:
+ *    type: object
+ *    properties:
+ *      tags:
+ *        $ref: "#/definitions/arrayOfTags"
+ *  branch:
+ *    type: string
+ *    description: Branch name
+ *    example: my-branch
+ *  arrayOfBranches:
+ *    type: array
+ *    items:
+ *      $ref: "#/definitions/branch"
+ *  release:
+ *    type: string
+ *    description: Release name
+ *    example: v0.0.1
+ *  arrayOfReleases:
+ *    type: array
+ *    items:
+ *      $ref: "#/definitions/release"
  *  getGit:
  *    type: object
  *    properties:
@@ -28,35 +57,6 @@ const router = new express.Router();
  *        $ref: "#/definitions/arrayOfBranches"
  *      releases:
  *        $ref: "#/definitions/arrayOfReleases"
- *  getDocker:
- *    type: object
- *    properties:
- *      tags:
- *        $ref: "#/definitions/arrayOfTags"
- *  arrayOfReleases:
- *    type: array
- *    items:
- *      $ref: "#/definitions/release"
- *  release:
- *    type: string
- *    description: Release name
- *    example: v0.0.1
- *  arrayOfBranches:
- *    type: array
- *    items:
- *      $ref: "#/definitions/branch"
- *  branch:
- *    type: string
- *    description: Branch name
- *    example: master
- *  arrayOfTags:
- *    type: array
- *    items:
- *      $ref: "#/definitions/tag"
- *  tag:
- *    type: string
- *    description: Tag name
- *    example: v0.0.1
  */
 
 /**
@@ -197,8 +197,8 @@ router.use(require('./postMinecraft'));
  *      required: false
  *      schema:
  *         type: string
- *         default: registry.hub.docker.com/v2
- *      description: The docker registry domain
+ *         default: 'registry.hub.docker.com/v2'
+ *      description: The docker registry domain, defaults to 'registry.hub.docker.com/v2'
  *    - name: limit
  *      in: query
  *      required: false
@@ -206,7 +206,7 @@ router.use(require('./postMinecraft'));
  *         type: integer
  *         minimum: 0
  *         default: 2
- *      description: The docker registry image tag limit
+ *      description: The docker registry image tag limit, defaults to 2
  *    produces:
  *      - application/json
  *    responses:
@@ -214,6 +214,8 @@ router.use(require('./postMinecraft'));
  *        description: The docker registry branches & releases
  *        schema:
  *          $ref: "#/definitions/getDocker"
+ *      400:
+ *        description: parameters error
  *      404:
  *        description: registry url not found
  *
@@ -244,8 +246,8 @@ router.use(require('./getDocker'));
  *      required: false
  *      schema:
  *         type: string
- *         default: github.com
- *      description: The git server domain
+ *         default: 'github.com'
+ *      description: The git server domain, defaults to 'github.com'
  *    - name: limit
  *      in: query
  *      required: false
@@ -253,7 +255,7 @@ router.use(require('./getDocker'));
  *         type: integer
  *         minimum: 0
  *         default: 2
- *      description: The git server repository release limit
+ *      description: The git server repository release limit, defaults to 2
  *    produces:
  *      - application/json
  *    responses:
@@ -261,6 +263,8 @@ router.use(require('./getDocker'));
  *        description: The git repository branches & releases
  *        schema:
  *          $ref: "#/definitions/getGit"
+ *      400:
+ *        description: parameters error
  *      404:
  *        description: repository url not found
  *

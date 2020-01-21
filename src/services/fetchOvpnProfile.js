@@ -1,17 +1,14 @@
 'use strict';
 
-const https = require('https');
+const axios = require('axios');
 
 async function fetchOvpnProfile(link) {
-    return new Promise((resolve, reject) => {
-        https.get(link, (res) => {
-            res.on('data', (data) => {
-                console.log('Serving '+link);
-                resolve(data);
-            });
-        }).on('error', (error) => {
-            console.error(error);
-        });
+    return axios.get(link)
+    .then(function (response) {
+        return response.data;
+    })
+    .catch(function (error) {
+        console.error(error);
     });
 };
 

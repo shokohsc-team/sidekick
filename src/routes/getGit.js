@@ -7,12 +7,12 @@ const fetchGitBranches = require('../services/fetchGitBranches');
 
 const router = new express.Router();
 
-router.get('/git', async (request, response) => {
+router.get('/git', async (req, res) => {
 
-    const author = request.query.author;
-    const repository = request.query.repository;
-    const domain = void 0 === request.query.domain ? 'github.com' : request.query.domain;
-    const limit = void 0 === request.query.limit ? 2 : request.query.limit;
+    const author = req.query.author;
+    const repository = req.query.repository;
+    const domain = void 0 === req.query.domain ? config.githubPublicServer : req.query.domain;
+    const limit = void 0 === req.query.limit ? 2 : req.query.limit;
     const repositoryUrl = 'https://' + domain + '/' + author + '/' + repository + '.git';
 
     const headRegex = /(.+)refs\/heads\/(?<head>.+$)/;
@@ -29,7 +29,7 @@ router.get('/git', async (request, response) => {
             heads.push(result.groups.head);
         }
     });
-    heads = heads.filter(branch => 'master' !== branch);
+    // heads = heads.filter(branch => 'master' !== branch);
 
     releases.split('\n').forEach(element => {
         const result = tagRegex.exec(element);
@@ -42,8 +42,8 @@ router.get('/git', async (request, response) => {
     })
     .slice(0, limit);
 
-    response.status(200);
-    response.send({
+    res.status(200);
+    res.send({
         'branches': heads,
         'releases': tags
     });

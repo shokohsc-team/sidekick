@@ -2,19 +2,18 @@
 
 const express = require('express');
 const sendRconCommand = require('../services/sendRconCommand');
-
 const router = new express.Router();
 
-router.post('/minecraft', async (request, response) => {
+router.post('/minecraft', async (req, res) => {
 
-    const user = request.body.user_name;
-    const triggerWord = request.body.trigger_word;
-    const message = request.body.text;
-    const command = 'say '+user +': '+ message.replace(new RegExp(triggerWord + ' '), '');
+    const user = req.body.user_name;
+    const triggerWord = req.body.trigger_word;
+    const message = req.body.text;
+    const command = 'say '+user+': '+ message.replace(new RegExp(triggerWord + ' '), '');
     await sendRconCommand(command);
 
-    response.status(200);
-    response.send(request.body);
+    res.status(200);
+    res.send(req.body);
 });
 
 module.exports = router;

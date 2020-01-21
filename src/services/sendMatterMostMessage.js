@@ -10,16 +10,15 @@ async function sendMatterMostMessage(msg) {
         // Server thread/INFO: Group `time` Group `type` Group `message`
         const regex = /^(?<time>\[\d{2}:\d{2}:\d{2}\]) (?<type>\[(Server thread|Server-Worker-\d+|Async Chat Thread - #\d+)\/INFO\]): (?<message>.+)$/g;
         try {
-            const { groups: { message } } = regex.exec(msg);
+            const result = regex.exec(msg);
             await mattermost.send({
-                text: message,
-                channel: '#minecraft',
-                username: 'minecraft'
+                text: result.groups.message,
+                channel: '#'+config.mattermostMinecraftChannel,
+                username: config.mattermostMinecraftUser
             });
         } catch (err) {
-            console.log('Cannot post to mattermost, msg: ');
-            console.log(msg);
-            console.log(err);
+            console.error('Cannot post to mattermost, msg: ' + msg);
+            console.error(err);
         }
     }
 };

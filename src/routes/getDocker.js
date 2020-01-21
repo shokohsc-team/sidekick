@@ -6,23 +6,31 @@ const fetchDockerTags = require('../services/fetchDockerTags');
 
 const router = new express.Router();
 
-router.get('/docker', async (request, response) => {
+router.get('/docker', async (req, res) => {
 
-
-    const author = request.query.author;
-    const image = request.query.image;
-    const domain = void 0 === request.query.domain ? 'registry.hub.docker.com/v2' : request.query.domain;
-    const limit = void 0 === request.query.limit ? 2 : request.query.limit;
+    const author = req.query.author;
+    const image = req.query.image;
+    const domain = void 0 === req.query.domain ? config.dockerPublicRegistry : req.query.domain;
+    const limit = void 0 === req.query.limit ? 2 : req.query.limit;
     const registryUrl = 'https://' + domain + '/repositories/' + author + '/' + image + '/tags/';
-
     let tags = [];
-    let res = {};
-    let page = 1;
-    while ((res = await fetchDockerTags(registryUrl + '?page=' + page)) && (res.next && res.results && null !== res.next)) {
-        res.results.forEach((tag) => {
-            tags.push(tag);
+
+    const init = await fetchDockerTags(registryUrl);
+    init.results.forEach((tag) => {
+        tags.push(tag);
+    });
+    if (10 < init.count) {
+        const pages = Math.ceil(parseInt(init.count) / 10);
+        let requests = [];
+        for (let page = 2; page <= pages; page++) {
+            requests.push(fetchDockerTags(registryUrl + '?page=' + page));
+        }
+        const responses = await Promise.all(requests);
+        responses.forEach((response) => {
+            response.results.forEach((tag) => {
+                tags.push(tag);
+            });
         });
-        page++;
     }
 
     tags = tags.sort((a, b) => {
@@ -31,11 +39,11 @@ router.get('/docker', async (request, response) => {
     .map((tag) => {
         return tag.name;
     })
-    .filter(tag => 'latest' !== tag)
+    // .filter(tag => 'latest' !== tag)
     .slice(0, limit);
 
-    response.status(200);
-    response.send({
+    res.status(200);
+    res.send({
         'tags': tags
     });
 });

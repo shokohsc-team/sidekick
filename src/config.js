@@ -69,6 +69,9 @@ const config = cfg({
       required: true,
       default: 5672,
   },
+  mattermostWebhookUrl: {
+      env: 'MATTERMOST_WEBHOOK_URL',
+  },
   freeopenvpnUrl: {
       env: 'FREEOPENVPN_URL',
       type: 'string',
@@ -79,11 +82,38 @@ const config = cfg({
       env: 'MATTERMOST_OVPN_CHAN',
       type: 'string',
       required: true,
-      default: '#vpn-client',
-  },
-  mattermostWebhookUrl: {
-      env: 'MATTERMOST_WEBHOOK_URL',
+      default: 'vpn-client',
       type: 'string',
+  },
+  mattermostMinecraftChannel: {
+      env: 'MATTERMOST_MINECRAFT_CHAN',
+      type: 'string',
+      required: true,
+      default: 'minecraft',
+  },
+  mattermostMinecraftUser: {
+      env: 'MATTERMOST_MINECRAFT_USER',
+      type: 'string',
+      required: true,
+      default: 'sidekick',
+  },
+  mattermostOvpnUser: {
+      env: 'MATTERMOST_OVPN_USER',
+      type: 'string',
+      required: true,
+      default: 'sidekick',
+  },
+  dockerPublicRegistry: {
+      env: 'DOCKER_PUBLIC_REGISTRY',
+      type: 'string',
+      required: true,
+      default: 'registry.hub.docker.com/v2',
+  },
+  githubPublicServer: {
+      env: 'GITHUB_PUBLIC_SERVER',
+      type: 'string',
+      required: true,
+      default: 'github.com',
   }
 });
 

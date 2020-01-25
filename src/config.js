@@ -102,18 +102,6 @@ const config = cfg({
       type: 'string',
       required: true,
       default: 'sidekick',
-  },
-  dockerPublicRegistry: {
-      env: 'DOCKER_PUBLIC_REGISTRY',
-      type: 'string',
-      required: true,
-      default: 'registry.hub.docker.com/v2',
-  },
-  githubPublicServer: {
-      env: 'GITHUB_PUBLIC_SERVER',
-      type: 'string',
-      required: true,
-      default: 'github.com',
   }
 });
 

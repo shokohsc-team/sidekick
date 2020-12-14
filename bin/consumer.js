@@ -51,6 +51,4 @@ function run() {
   }).catch(onError);
 }
 
-if (void 0 !== config.mattermostWebhookUrl) {
-  run();
-}
+run();

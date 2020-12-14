@@ -46,8 +46,8 @@
     "eslint-plugin-import": "^2.7.0",
     "extend": "^3.0.2",
     "fstream": "^1.0.12",
-    "mocha": "^6.2.2",
-    "nodemon": "^1.19.4",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.6",
     "proxyquire": "^2.0.1",
     "sinon": "^4.4.2",
     "superagent": "^5.1.0"

@@ -3,6 +3,4 @@
 if [[ ! -z "$AMQP_HOST" ]]
 then
   exec npm run consumer --prefix /app
-else
-  exec npm start --prefix /app
 fi

@@ -1,7 +1,8 @@
 #!/usr/bin/with-contenv bash
 
-if [[ ! -z "$AMQP_HOST" ]]; then
+if [[ ! -z "$AMQP_HOST" ]]
+then
   exec npm run consumer --prefix /app
 else
-  exec npm run start --prefix /app
+  exec npm start --prefix /app
 fi

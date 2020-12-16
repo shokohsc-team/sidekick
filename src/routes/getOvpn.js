@@ -22,6 +22,8 @@ router.get('/ovpn', async (req, res) => {
         });
     }
 
+    console.log('Served '+profileLink);
+
     res.status(200);
     res.set('Content-Type', 'text/plain');
     res.send(profile);

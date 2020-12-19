@@ -78,6 +78,20 @@ const config = cfg({
       required: true,
       default: 'https://www.freeopenvpn.org/en',
   },
+  allowedCountriesServers: {
+      env: 'ALLOWED_COUNTRIES_SERVERS',
+      type: 'string',
+      required: false,
+      default: '*',
+      // '*', 'russia', 'usa', 'japan', 'korea', 'thailand' are valid choices for now
+  },
+  openvpnProfileProtocol: {
+      env: 'OPENVPN_PROFILE_PROTOCOL',
+      type: 'string',
+      required: false,
+      default: '*',
+      // '*', 'udp', 'tcp' are valid choices
+  },
   mattermostOvpnChannel: {
       env: 'MATTERMOST_OVPN_CHAN',
       type: 'string',

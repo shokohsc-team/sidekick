@@ -18,9 +18,12 @@ async function crawlOvpnServer() {
                     let links = [];
 
                     $(body).find('div a div.button:contains("Download")').each(function(){
-                        links.push($(this).parent().attr('href'));
+                        const href = $(this).parent().attr('href');
+                        const country = href.replace(/^cf\//, '').replace(/\.php$/, '');
+                        if('*' === config.allowedCountriesServers || 0 <= config.allowedCountriesServers.toLowerCase().search(new RegExp(`${country.toLowerCase()}`, 'g')))
+                          links.push(href);
                     });
-                    const index = Math.floor(Math.random() * Math.floor(links.length - 1));
+                    const index = Math.floor(Math.random() * Math.floor(links.length));
                     resolve(links[index]);
                 }
                 done();

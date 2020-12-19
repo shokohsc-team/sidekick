@@ -8,7 +8,8 @@ async function fetchOvpnProfile(link) {
         return response.data;
     })
     .catch(function (error) {
-        console.error(error);
+        // console.error(error);
+        console.error('Failed to serve '+link);
     });
 };
 

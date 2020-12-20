@@ -22,7 +22,9 @@ router.get('/ovpn', async (req, res) => {
         });
     }
 
-    console.log('Served '+profileLink);
+    const date = new Date();
+
+    console.log(`Served ${profileLink} on ${date.toDateString()} ${date.toTimeString()}`);
 
     res.status(200);
     res.set('Content-Type', 'text/plain');

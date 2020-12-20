@@ -9,7 +9,9 @@ async function fetchOvpnProfile(link) {
     })
     .catch(function (error) {
         // console.error(error);
-        console.error('Failed to serve '+link);
+        const date = new Date();
+
+        console.error(`Failed to serve ${link} on ${date.toDateString()} ${date.toTimeString()}`);
     });
 };
 

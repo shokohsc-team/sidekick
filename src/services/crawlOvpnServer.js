@@ -18,7 +18,7 @@ async function crawlOvpnServer() {
                     let links = [];
 
                     // $(body).find('div a div.button:contains("Download")').each(function(){
-                    $(body).find('center div div div a div.button:contains("Download")').each(function(){
+                    $(body).find("div.button:contains('Download')").each(function(){
                         const href = $(this).parent().attr('href');
                         // const country = href.replace(/^cf\//, '').replace(/\.php$/, '');
                         const country = href.replace(/^private\.php\?cntid=$/, '');

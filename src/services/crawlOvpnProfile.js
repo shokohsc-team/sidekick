@@ -19,7 +19,7 @@ async function crawlOvpnProfile(link) {
                     let links = [];
 
                     // $(body).find('div p.lp a').each(function(){
-                    $(body).find('div p.data a').each(function(){
+                    $(body).find('center div div div p.data a').each(function(){
                         const match = $(this).attr('href').match(regex);
                         if (null !== match && 0 < match.length) {
                             links.push($(this).attr('href'));

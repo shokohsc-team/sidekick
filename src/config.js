@@ -76,7 +76,7 @@ const config = cfg({
       env: 'FREEOPENVPN_URL',
       type: 'string',
       required: true,
-      default: 'https://www.freeopenvpn.org/en',
+      default: 'https://www.freeopenvpn.org',
   },
   allowedCountriesServers: {
       env: 'ALLOWED_COUNTRIES_SERVERS',

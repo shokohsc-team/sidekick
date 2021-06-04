@@ -24,7 +24,7 @@ router.get('/ovpn', async (req, res) => {
 
     const date = new Date();
 
-    console.log(`Served ${profileLink} on ${date.toDateString()} ${date.toTimeString()}`);
+    console.log(`Served ${profileLink.replace(/\/pservers\/(.+)\/(.+)/ig, '$2')} on ${date.toDateString()} ${date.toTimeString()}`);
 
     res.status(200);
     res.set('Content-Type', 'text/plain');

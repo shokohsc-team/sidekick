@@ -18,8 +18,7 @@ async function crawlOvpnProfile(link) {
                     const regex = '*' === config.openvpnProfileProtocol.toLowerCase() ? new RegExp('.ovpn$', 'g') : new RegExp(`_${config.openvpnProfileProtocol.toLowerCase()}\.ovpn$`, 'g');
                     let links = [];
 
-                    // $(body).find('div p.lp a').each(function(){
-                    $(body).find('p.data a').each(function(){
+                    $(body).find('center div div div p.data a').each(function(){
                         const match = $(this).attr('href').match(regex);
                         if (null !== match && 0 < match.length) {
                             links.push($(this).attr('href'));

@@ -1,9 +1,10 @@
 'use strict';
 
+const config = require('../../src/config');
 const axios = require('axios');
 
 async function fetchOvpnProfile(link) {
-    return axios.get(link)
+    return axios.get(config.freeopenvpnUrl + '/' + link)
     .then(function (response) {
         return response.data;
     })
@@ -11,7 +12,7 @@ async function fetchOvpnProfile(link) {
         // console.error(error);
         const date = new Date();
 
-        console.error(`Failed to serve ${link} on ${date.toDateString()} ${date.toTimeString()}`);
+        console.error(`Failed to serve ${link.replace(/\/pservers\/(.+)\/(.+)/ig, '$2')} on ${date.toDateString()} ${date.toTimeString()}`);
     });
 };
 

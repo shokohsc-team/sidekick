@@ -19,7 +19,7 @@ async function crawlOvpnServer() {
 
                     $(body).find("div.button:contains('Download')").each(function(){
                         const href = $(this).parent().attr('href');
-                        const country = href.replace(/^private\.php\?cntid=/, '');
+                        const country = href.replace(/^private\.php\?cntid=/, '').replace(/&lang=en$/, '');
                         if('*' === config.allowedCountriesServers || 0 <= config.allowedCountriesServers.toLowerCase().search(new RegExp(`${country.toLowerCase()}`, 'g')))
                           links.push(href);
                     });
